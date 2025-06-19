@@ -10,7 +10,9 @@
   },
   "dependencies": {
     "@astrojs/cloudflare": "^12.5.5",
-    "astro": "^5.9.4"
+    "astro": "^5.9.4",
+    "remark": "^15.0.1",
+    "remark-html": "^16.0.1"
   },
   "devDependencies": {
     "wrangler": "^4.20.3"
