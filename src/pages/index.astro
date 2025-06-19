@@ -2,7 +2,7 @@
 import Layout from "@/layout/PageLayout.astro";
 import { fetchIssues } from "@/lib/github";
 import IssueGrid from "@/components/IssueGrid";
-import { Alert } from "@trussworks/react-uswds";
+import { Alert, Button, ButtonGroup } from "@trussworks/react-uswds";
 
 const issues = await fetchIssues({
   owner: "agilesix",
@@ -33,7 +33,6 @@ const issues = await fetchIssues({
         these items by voting on the issues you'd like to see addressed first.
       </p>
     </div>
-
-    <IssueGrid issues={issues} />
   </div>
+  <IssueGrid issues={issues} />
 </Layout>

@@ -1,5 +1,6 @@
 import type { Issue } from "@/types";
 import React from "react";
+import { CardGroup } from "@trussworks/react-uswds";
 import IssueCard from "./IssueCard";
 
 interface Props {
@@ -8,13 +9,11 @@ interface Props {
 
 const IssueGrid: React.FC<Props> = ({ issues }) => {
   return (
-    <ul className="issue-grid">
+    <CardGroup>
       {issues.map((issue) => (
-        <li key={issue.url}>
-          <IssueCard issue={issue} />
-        </li>
+        <IssueCard key={issue.url} issue={issue} />
       ))}
-    </ul>
+    </CardGroup>
   );
 };
 
