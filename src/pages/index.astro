@@ -7,8 +7,9 @@ import { Alert } from "@trussworks/react-uswds";
 const issues = await fetchIssues({
   owner: "agilesix",
   repo: "simpler-grants-sandbox",
-  labels: ["help wanted"],
+  labels: ["proposal"],
   type: "Deliverable",
+  test: true,
 });
 ---
 
@@ -20,14 +21,18 @@ const issues = await fetchIssues({
       helps communities manage and track participatory budgeting initiatives.
     </p>
 
-    <Alert type="info" heading="Informative status" headingLevel="h4">
+    <Alert type="info" heading="Prototype application" headingLevel="h2">
       This is a prototype application. The data shown here is for demonstration
       purposes only.
     </Alert>
-    <p>
-      Below are the current issues that need attention in the
-      simpler-grants-sandbox repository:
-    </p>
+    <div class="margin-top-4 margin-bottom-2">
+      <h2 class="margin-bottom-0">Roadmap proposals</h2>
+      <p class="usa-font-lead margin-top-1">
+        The Simpler.Grants.gov team has identified the following items as
+        potential priorities for the next 6 months. Please help us prioritize
+        these items by voting on the issues you'd like to see addressed first.
+      </p>
+    </div>
 
     <IssueGrid issues={issues} />
   </div>

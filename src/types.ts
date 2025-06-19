@@ -1,11 +1,17 @@
 import { z } from "zod";
 
+const nullableString = z
+  .string()
+  .nullable()
+  .transform((val) => val ?? "No description");
+
 export const IssueSchema = z
   .object({
-    url: z.string().url(),
+    html_url: z.string().url(),
     title: z.string(),
-    body: z.string(),
-    body_html: z.string(),
+    body: nullableString,
+    body_html: nullableString,
+    body_text: nullableString,
     labels: z.array(
       z.object({
         id: z.number(),
@@ -16,7 +22,9 @@ export const IssueSchema = z
   })
   .transform((data) => ({
     ...data,
+    url: data.html_url,
     bodyHtml: data.body_html,
+    bodyText: data.body_text,
   }));
 
 export type Issue = z.infer<typeof IssueSchema>;

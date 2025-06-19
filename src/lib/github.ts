@@ -7,6 +7,7 @@ type issueParams = {
   labels: string[];
   state?: "open" | "closed" | "all";
   type?: string;
+  test?: boolean;
 };
 
 /**
@@ -24,6 +25,7 @@ export async function fetchIssues({
   state = "open",
   labels,
   type,
+  test = false,
 }: issueParams): Promise<Issue[]> {
   // Set query params
   const query = new URLSearchParams();
@@ -36,15 +38,27 @@ export async function fetchIssues({
   }
 
   // Make request
-  const url = `https://api.github.com/repos/${owner}/${repo}/issues?${query.toString()}`;
-  const response = await fetch(url, {
-    headers: {
-      "X-GitHub-Api-Version": "2022-11-28",
-      Accept: "application/vnd.github.full+json", // includes body_html and body
-    },
-  });
-  const rawData = await response.json();
+  let rawData;
+  if (test) {
+    rawData = await import("@/lib/sample.json").then(
+      (module) => module.default
+    );
+  } else {
+    const url = `https://api.github.com/repos/${owner}/${repo}/issues?${query.toString()}`;
+    const response = await fetch(url, {
+      headers: {
+        "X-GitHub-Api-Version": "2022-11-28",
+        Accept: "application/vnd.github.full+json", // includes body_html and body
+      },
+    });
+    rawData = await response.json();
+  }
 
   // Parse response directly with Zod array
-  return z.array(IssueSchema).parse(rawData);
+  try {
+    return z.array(IssueSchema).parse(rawData);
+  } catch (error) {
+    console.error(error);
+    return [];
+  }
 }
