@@ -65,21 +65,30 @@ const IssueCard: React.FC<Props> = ({ issue }) => {
             className="usa-button usa-button--default usa-button-group__item"
             variant="unstyled"
           >
-            <Icon.Launch className="margin-right-1" />
+            <Icon.Launch
+              className="margin-right-1"
+              aria-label="External link"
+            />
             View
           </Link>
           <Button
             type="button"
             className="usa-button--outline usa-button-group__item"
           >
-            <Icon.ThumbUpAlt className="margin-right-1" />
+            <Icon.ThumbUpAlt
+              className="margin-right-1"
+              aria-label="Thumbs up"
+            />
             Upvote
           </Button>
           <Button
             type="button"
             className="usa-button--outline usa-button-group__item"
           >
-            <Icon.ThumbDownAlt className="margin-right-1" />
+            <Icon.ThumbDownAlt
+              className="margin-right-1"
+              aria-label="Thumbs down"
+            />
             Downvote
           </Button>
         </ButtonGroup>
