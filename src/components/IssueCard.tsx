@@ -59,11 +59,12 @@ const IssueCard: React.FC<Props> = ({ issue }) => {
         )}
       </CardBody>
       <CardFooter>
-        <ButtonGroup type="default" className="width-full">
+        <ButtonGroup type="default">
           <Link
             href={issue.html_url}
-            className="usa-button usa-button--default usa-button-group__item"
-            variant="unstyled"
+            className="usa-button usa-button--default"
+            target="_blank"
+            rel="noopener noreferrer"
           >
             <Icon.Launch
               className="margin-right-1"
@@ -71,20 +72,14 @@ const IssueCard: React.FC<Props> = ({ issue }) => {
             />
             View
           </Link>
-          <Button
-            type="button"
-            className="usa-button--outline usa-button-group__item"
-          >
+          <Button type="button" className="usa-button--outline">
             <Icon.ThumbUpAlt
               className="margin-right-1"
               aria-label="Thumbs up"
             />
             Upvote
           </Button>
-          <Button
-            type="button"
-            className="usa-button--outline usa-button-group__item"
-          >
+          <Button type="button" className="usa-button--outline">
             <Icon.ThumbDownAlt
               className="margin-right-1"
               aria-label="Thumbs down"
