@@ -1,19 +1,5 @@
 import { z } from "zod";
-
-const IssueSchema = z.object({
-  url: z.string().url(),
-  title: z.string(),
-  body: z.string(),
-  labels: z.array(
-    z.object({
-      id: z.number(),
-      name: z.string(),
-      color: z.string(),
-    })
-  ),
-});
-
-export type Issue = z.infer<typeof IssueSchema>;
+import { type Issue, IssueSchema } from "@/types";
 
 type issueParams = {
   owner: string;

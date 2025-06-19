@@ -1,0 +1,20 @@
+---
+import type { Issue } from "@/types";
+import IssueCard from "./IssueCard.astro";
+
+interface Props {
+  issues: Issue[];
+}
+
+const { issues } = Astro.props as Props;
+---
+
+<ul class="issue-grid">
+  {
+    issues.map((issue) => (
+      <li>
+        <IssueCard issue={issue} />
+      </li>
+    ))
+  }
+</ul>
