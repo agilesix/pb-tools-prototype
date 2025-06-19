@@ -1,7 +1,8 @@
 ---
-import Layout from "@/layout/Layout.astro";
+import Layout from "@/layout/PageLayout.astro";
 import { fetchIssues } from "@/lib/github";
 import IssueGrid from "@/components/IssueGrid";
+import { Alert } from "@trussworks/react-uswds";
 
 const issues = await fetchIssues({
   owner: "agilesix",
@@ -12,6 +13,22 @@ const issues = await fetchIssues({
 ---
 
 <Layout title="Home" description="Home page">
-  <h1>Home</h1>
-  <IssueGrid issues={issues} />
+  <div class="usa-prose">
+    <h1>Community roadmapping</h1>
+    <p class="usa-intro">
+      Welcome to the Participatory Budgeting Tools Prototype. This application
+      helps communities manage and track participatory budgeting initiatives.
+    </p>
+
+    <Alert type="info" heading="Informative status" headingLevel="h4">
+      This is a prototype application. The data shown here is for demonstration
+      purposes only.
+    </Alert>
+    <p>
+      Below are the current issues that need attention in the
+      simpler-grants-sandbox repository:
+    </p>
+
+    <IssueGrid issues={issues} />
+  </div>
 </Layout>

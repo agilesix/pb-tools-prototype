@@ -1,0 +1,58 @@
+---
+import BaseLayout from "@/layout/BaseLayout.astro";
+import { GovBanner } from "@trussworks/react-uswds";
+import { PageHeader, type NavItem } from "@/components/PageHeader";
+
+// #########################################################
+// PageLayout Props
+// #########################################################
+
+export interface Props {
+  title: string;
+  description: string;
+  navItems?: NavItem[];
+}
+
+const {
+  title,
+  description,
+  navItems = [
+    { label: "Home", href: "/" },
+    { label: "About", href: "/about" },
+  ],
+} = Astro.props as Props;
+
+// #########################################################
+// Determine current page to highlight in header
+// #########################################################
+
+const currentPath = Astro.url.pathname;
+
+const processedNavItems = navItems.map((item) => {
+  if ("links" in item) {
+    // For dropdown items, check if any of the nested links match
+    const hasCurrentLink = item.links.some((link) => link.href === currentPath);
+    return {
+      ...item,
+      isCurrent: hasCurrentLink,
+    };
+  } else {
+    // For simple links, check if href matches current path
+    return {
+      ...item,
+      isCurrent: item.href === currentPath,
+    };
+  }
+});
+---
+
+<BaseLayout title={title} description={description}>
+  <a class="usa-skipnav" href="#main-content">Skip to main content</a>
+  <GovBanner client:load />
+  <PageHeader navItems={processedNavItems} />
+  <main id="main-content" class="usa-section">
+    <div class="grid-container">
+      <slot />
+    </div>
+  </main>
+</BaseLayout>

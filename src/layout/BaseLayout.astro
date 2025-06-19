@@ -15,8 +15,26 @@ const { title, description } = Astro.props as Props;
     <meta name="generator" content={Astro.generator} />
     <title>{title} | PB Tools Prototype</title>
     <meta name="description" content={description} />
+
+    <!-- USWDS CSS -->
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/@uswds/uswds@3.13.0/dist/css/uswds.min.css"
+    />
+
+    <!-- USWDS JavaScript -->
+    <script
+      src="https://cdn.jsdelivr.net/npm/@uswds/uswds@3.13.0/dist/js/uswds.min.js"
+    ></script>
   </head>
   <body>
     <slot />
   </body>
 </html>
+
+<script>
+  // Initialize USWDS
+  if (typeof window !== "undefined" && (window as any).uswds) {
+    (window as any).uswds.usaInit();
+  }
+</script>
