@@ -22,6 +22,8 @@ const {
   ],
 } = Astro.props as Props;
 
+const siteName = "Simpler Planning";
+
 // #########################################################
 // Determine current page to highlight in header
 // #########################################################
@@ -46,10 +48,9 @@ const processedNavItems = navItems.map((item) => {
 });
 ---
 
-<BaseLayout title={title} description={description}>
+<BaseLayout siteName={siteName} title={title} description={description}>
   <a class="usa-skipnav" href="#main-content">Skip to main content</a>
-  <GovBanner client:load />
-  <PageHeader navItems={processedNavItems} />
+  <PageHeader title={siteName} navItems={processedNavItems} />
   <main id="main-content" class="usa-section">
     <div class="grid-container">
       <slot />
