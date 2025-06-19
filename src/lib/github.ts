@@ -37,7 +37,12 @@ export async function fetchIssues({
 
   // Make request
   const url = `https://api.github.com/repos/${owner}/${repo}/issues?${query.toString()}`;
-  const response = await fetch(url);
+  const response = await fetch(url, {
+    headers: {
+      "X-GitHub-Api-Version": "2022-11-28",
+      Accept: "application/vnd.github.full+json", // includes body_html and body
+    },
+  });
   const rawData = await response.json();
 
   // Parse response directly with Zod array

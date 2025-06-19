@@ -1,7 +1,7 @@
 ---
 import Layout from "@/layout/Layout.astro";
 import { fetchIssues } from "@/lib/github";
-import IssueGrid from "@/components/IssueGrid.astro";
+import IssueGrid from "@/components/IssueGrid";
 
 const issues = await fetchIssues({
   owner: "agilesix",
