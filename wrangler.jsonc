@@ -1,0 +1,9 @@
+{
+  "$schema": "node_modules/wrangler/config-schema.json",
+  "name": "pb-tools",
+  // Update to today's date
+  "compatibility_date": "2025-06-18",
+  "assets": {
+    "directory": "./dist/"
+  }
+}

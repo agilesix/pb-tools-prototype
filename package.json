@@ -1,5 +1,5 @@
 {
-  "name": "simpler-grants-pb-tool",
+  "name": "pb-tools",
   "type": "module",
   "version": "0.0.1",
   "scripts": {
@@ -9,6 +9,10 @@
     "astro": "astro"
   },
   "dependencies": {
+    "@astrojs/cloudflare": "^12.5.5",
     "astro": "^5.9.4"
+  },
+  "devDependencies": {
+    "wrangler": "^4.20.3"
   }
 }
