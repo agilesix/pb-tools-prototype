@@ -22,6 +22,10 @@ export const SingleVoteButtonGroup: React.FC<Props> = ({
     if (voteState === "upvoted") {
       setVoteState(null);
       voteStoreActions.decrementUpvote(issueUrl);
+    } else if (voteState === "downvoted") {
+      setVoteState("upvoted");
+      voteStoreActions.decrementDownvote(issueUrl);
+      voteStoreActions.incrementUpvote(issueUrl);
     } else {
       setVoteState("upvoted");
       voteStoreActions.incrementUpvote(issueUrl);
@@ -37,6 +41,10 @@ export const SingleVoteButtonGroup: React.FC<Props> = ({
     if (voteState === "downvoted") {
       setVoteState(null);
       voteStoreActions.decrementDownvote(issueUrl);
+    } else if (voteState === "upvoted") {
+      setVoteState("downvoted");
+      voteStoreActions.decrementUpvote(issueUrl);
+      voteStoreActions.incrementDownvote(issueUrl);
     } else {
       setVoteState("downvoted");
       voteStoreActions.incrementDownvote(issueUrl);

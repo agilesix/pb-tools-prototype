@@ -60,7 +60,7 @@ export const IssueCard: React.FC<IssueCardProps> = ({ issue }) => {
       <CardHeader>
         <h3 className="usa-card__heading">{issue.title}</h3>
         <p id="issue-score" className="usa-card__heading-description">
-          Score: {score} ({proposalVotes.upvote} upvotes,{" "}
+          <strong>Score:</strong> {score} ({proposalVotes.upvote} upvotes,{" "}
           {proposalVotes.downvote} downvotes)
         </p>
       </CardHeader>
