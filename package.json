@@ -11,9 +11,11 @@
   "dependencies": {
     "@astrojs/cloudflare": "^12.5.5",
     "@astrojs/react": "^4.3.0",
+    "@nanostores/react": "^1.0.0",
     "@trussworks/react-uswds": "^10.0.2",
     "@uswds/uswds": "^3.13.0",
     "astro": "^5.9.4",
+    "nanostores": "^1.0.1",
     "react": "^19.1.0",
     "react-dom": "^19.1.0"
   },
