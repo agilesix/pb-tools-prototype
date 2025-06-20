@@ -10,6 +10,8 @@ type issueParams = {
   test?: boolean;
 };
 
+const scores = [92, 98, 73, 65, 82, 56, 90];
+
 /**
  * Fetch issues from a GitHub repository
  * @param owner - The owner of the repository
@@ -56,7 +58,12 @@ export async function fetchIssues({
 
   // Parse response directly with Zod array
   try {
-    return z.array(IssueSchema).parse(rawData);
+    const issues = z.array(IssueSchema).parse(rawData);
+    return issues.map((issue, index) => ({
+      ...issue,
+      upvoteCount: scores[index],
+      downvoteCount: 100 - scores[index],
+    }));
   } catch (error) {
     console.error(error);
     return [];

@@ -2,30 +2,50 @@ import { Button, ButtonGroup, Icon, Link } from "@trussworks/react-uswds";
 import React, { useState } from "react";
 
 import type { Issue } from "../types";
+import { useVoteStore } from "../lib/useVoteStore";
 
 interface Props {
+  voteStoreActions: ReturnType<typeof useVoteStore>;
   issue: Issue;
 }
 
 type VoteState = "upvoted" | "downvoted" | null;
 
-export const SingleVoteButtonGroup: React.FC<Props> = ({ issue }) => {
-  const [voteState, setVoteState] = useState<VoteState>(null);
+export const SingleVoteButtonGroup: React.FC<Props> = ({
+  voteStoreActions,
+  issue,
+}) => {
+  const [voteState, setVoteState] = useState<VoteState | null>(null);
+  const issueUrl = issue.html_url;
 
   const handleUpvote = () => {
     if (voteState === "upvoted") {
       setVoteState(null);
+      voteStoreActions.decrementUpvote(issueUrl);
     } else {
       setVoteState("upvoted");
+      voteStoreActions.incrementUpvote(issueUrl);
     }
+    console.log(
+      "Score for",
+      issueUrl,
+      voteStoreActions.getProposalScore(issueUrl)
+    );
   };
 
   const handleDownvote = () => {
     if (voteState === "downvoted") {
       setVoteState(null);
+      voteStoreActions.decrementDownvote(issueUrl);
     } else {
       setVoteState("downvoted");
+      voteStoreActions.incrementDownvote(issueUrl);
     }
+    console.log(
+      "Score for",
+      issueUrl,
+      voteStoreActions.getProposalScore(issueUrl)
+    );
   };
 
   return (

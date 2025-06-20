@@ -12,6 +12,8 @@ export const IssueSchema = z
     body: nullableString,
     body_html: nullableString,
     body_text: nullableString,
+    upvoteCount: z.number().optional().default(0),
+    downvoteCount: z.number().optional().default(0),
     labels: z.array(
       z.object({
         id: z.number(),

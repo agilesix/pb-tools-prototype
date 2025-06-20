@@ -10,6 +10,7 @@ import {
 } from "@trussworks/react-uswds";
 
 import { SingleVoteButtonGroup } from "./SingleVoteButtonGroup";
+import { useVoteStore } from "@/lib/useVoteStore";
 
 // #########################################################
 // Utility functions
@@ -42,6 +43,7 @@ interface IssueCardProps {
 }
 
 export const IssueCard: React.FC<IssueCardProps> = ({ issue }) => {
+  const voteStoreActions = useVoteStore();
   return (
     <Card className="tablet:grid-col-6 desktop:grid-col-6">
       <CardHeader>
@@ -65,7 +67,10 @@ export const IssueCard: React.FC<IssueCardProps> = ({ issue }) => {
         )}
       </CardBody>
       <CardFooter>
-        <SingleVoteButtonGroup issue={issue} />
+        <SingleVoteButtonGroup
+          issue={issue}
+          voteStoreActions={voteStoreActions}
+        />
       </CardFooter>
     </Card>
   );
