@@ -1,0 +1,24 @@
+name: CD - Publish to Cloudflare
+
+on:
+  # Trigger the workflow every time we push to the `main` branch
+  # if it includes changes to the website/ directory
+  push:
+    branches: [main]
+  # Allows us to run this workflow manually from the Actions tab on GitHub.
+  workflow_dispatch:
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout your repository using git
+        uses: actions/checkout@v4
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Deploy
+        uses: cloudflare/wrangler-action@v3
+        with:
+          apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
