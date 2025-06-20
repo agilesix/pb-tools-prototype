@@ -1,21 +1,19 @@
 import type { Issue } from "@/types";
 import React from "react";
+
 import {
-  Button,
-  ButtonGroup,
   Card,
   CardHeader,
   CardBody,
   CardFooter,
-  Link,
   Tag,
-  Icon,
 } from "@trussworks/react-uswds";
 
-interface Props {
-  issue: Issue;
-}
+import { SingleVoteButtonGroup } from "./SingleVoteButtonGroup";
 
+// #########################################################
+// Utility functions
+// #########################################################
 const summary = (issue: Issue) => {
   const markdownContent = issue.body || "";
 
@@ -35,7 +33,15 @@ const summary = (issue: Issue) => {
     : cleanedText;
 };
 
-const IssueCard: React.FC<Props> = ({ issue }) => {
+// #########################################################
+// IssueCard component
+// #########################################################
+
+interface IssueCardProps {
+  issue: Issue;
+}
+
+export const IssueCard: React.FC<IssueCardProps> = ({ issue }) => {
   return (
     <Card className="tablet:grid-col-6 desktop:grid-col-6">
       <CardHeader>
@@ -51,7 +57,7 @@ const IssueCard: React.FC<Props> = ({ issue }) => {
                   key={label.name}
                   className="display-inline-block margin-right-1"
                 >
-                  <Tag background={`#${label.color}`}>{label.name}</Tag>
+                  <Tag className="bg-accent-warm-darker">{label.name}</Tag>
                 </li>
               ))}
             </ul>
@@ -59,37 +65,8 @@ const IssueCard: React.FC<Props> = ({ issue }) => {
         )}
       </CardBody>
       <CardFooter>
-        <ButtonGroup type="default">
-          <Link
-            href={issue.html_url}
-            className="usa-button usa-button--default"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Icon.Launch
-              className="margin-right-1"
-              aria-label="External link"
-            />
-            View
-          </Link>
-          <Button type="button" className="usa-button--outline">
-            <Icon.ThumbUpAlt
-              className="margin-right-1"
-              aria-label="Thumbs up"
-            />
-            Upvote
-          </Button>
-          <Button type="button" className="usa-button--outline">
-            <Icon.ThumbDownAlt
-              className="margin-right-1"
-              aria-label="Thumbs down"
-            />
-            Downvote
-          </Button>
-        </ButtonGroup>
+        <SingleVoteButtonGroup issue={issue} />
       </CardFooter>
     </Card>
   );
 };
-
-export default IssueCard;

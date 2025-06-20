@@ -1,13 +1,13 @@
 import type { Issue } from "@/types";
 import React from "react";
 import { CardGroup } from "@trussworks/react-uswds";
-import IssueCard from "./IssueCard";
+import { IssueCard } from "./IssueCard";
 
-interface Props {
+interface IssueGridProps {
   issues: Issue[];
 }
 
-const IssueGrid: React.FC<Props> = ({ issues }) => {
+export const IssueGrid: React.FC<IssueGridProps> = ({ issues }) => {
   return (
     <CardGroup>
       {issues.map((issue) => (
@@ -16,5 +16,3 @@ const IssueGrid: React.FC<Props> = ({ issues }) => {
     </CardGroup>
   );
 };
-
-export default IssueGrid;
