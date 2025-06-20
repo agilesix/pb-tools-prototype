@@ -116,10 +116,18 @@ export const voteStoreActions = {
 
   getProposalVotes: (
     store: typeof proposalTotalVoteStore | typeof userProposalVoteStore,
-    url: string
+    url: string,
+    initialVotes?: VoteCounts
   ): VoteCounts => {
     const current = store.get();
-    return current[url] || { upvote: 0, downvote: 0 };
+    if (current[url]) {
+      return current[url];
+    }
+    if (initialVotes) {
+      store.set({ ...current, [url]: initialVotes });
+      return initialVotes;
+    }
+    return { upvote: 0, downvote: 0 };
   },
 
   getTotalVotesCastAcrossAllProposals: (

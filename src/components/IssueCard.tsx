@@ -43,11 +43,26 @@ interface IssueCardProps {
 }
 
 export const IssueCard: React.FC<IssueCardProps> = ({ issue }) => {
-  const voteStoreActions = useVoteStore();
+  const voteStore = useVoteStore();
+  const issueUrl = issue.html_url;
+
+  // Read from the store. This is now reactive.
+  // On first read, it will seed the store with the issue's initial counts.
+  const initialVotes = {
+    upvote: issue.upvoteCount,
+    downvote: issue.downvoteCount,
+  };
+  const proposalVotes = voteStore.getProposalVotes(issueUrl, initialVotes);
+  const score = proposalVotes.upvote - proposalVotes.downvote;
+
   return (
     <Card className="tablet:grid-col-6 desktop:grid-col-6">
       <CardHeader>
         <h3 className="usa-card__heading">{issue.title}</h3>
+        <p id="issue-score" className="usa-card__heading-description">
+          Score: {score} ({proposalVotes.upvote} upvotes,{" "}
+          {proposalVotes.downvote} downvotes)
+        </p>
       </CardHeader>
       <CardBody>
         <p>{summary(issue)}</p>
@@ -67,10 +82,7 @@ export const IssueCard: React.FC<IssueCardProps> = ({ issue }) => {
         )}
       </CardBody>
       <CardFooter>
-        <SingleVoteButtonGroup
-          issue={issue}
-          voteStoreActions={voteStoreActions}
-        />
+        <SingleVoteButtonGroup issue={issue} voteStoreActions={voteStore} />
       </CardFooter>
     </Card>
   );
