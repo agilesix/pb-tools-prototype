@@ -6,6 +6,8 @@ import {
   PrimaryNav,
   Title,
   Menu,
+  Button,
+  Icon,
 } from "@trussworks/react-uswds";
 
 // Define types for navigation items
@@ -26,6 +28,11 @@ export type NavItem = NavLink | NavDropdown;
 export interface PageHeaderProps {
   title?: string;
   navItems?: NavItem[];
+  user?: {
+    email?: string | null;
+    name?: string | null;
+    image?: string | null;
+  } | null;
 }
 
 const onToggle = (
@@ -42,14 +49,28 @@ const onToggle = (
 export const PageHeader = ({
   title = "Project Title",
   navItems = [],
+  user,
 }: PageHeaderProps): JSX.Element => {
   const [expanded, setExpanded] = useState(false);
+  const [userDropdownOpen, setUserDropdownOpen] = useState(false);
   const onClick = (): void => setExpanded((prvExpanded) => !prvExpanded);
 
   // Initialize open state for dropdowns
   const [isOpen, setIsOpen] = useState<boolean[]>(
     new Array(navItems.filter((item) => "links" in item).length).fill(false)
   );
+
+  // Handle login/logout
+  const handleLogin = async () => {
+    const { signIn } = await import("auth-astro/client");
+    console.log("signIn");
+    signIn("github");
+  };
+
+  const handleLogout = async () => {
+    const { signOut } = await import("auth-astro/client");
+    signOut();
+  };
 
   // Convert navItems to the format expected by PrimaryNav
   const processedNavItems = navItems.map((item, index) => {
@@ -101,6 +122,46 @@ export const PageHeader = ({
     }
   });
 
+  // Add user authentication section to navigation
+  const authNavItem = user ? (
+    <div key="user-auth">
+      <NavDropDownButton
+        menuId="userDropdown"
+        onToggle={(): void => setUserDropdownOpen(!userDropdownOpen)}
+        isOpen={userDropdownOpen}
+        label={user.name || user.email || "User"}
+      />
+      <Menu
+        items={[
+          <button
+            key="logout"
+            onClick={handleLogout}
+            className="usa-button usa-button--unstyled width-full text-left padding-2 text-white hover:bg-primary-dark"
+            style={{ border: "none", background: "none", cursor: "pointer" }}
+          >
+            <Icon.Logout aria-label="Logout" size={3} />
+            Sign Out
+          </button>,
+        ]}
+        isOpen={userDropdownOpen}
+        id="userDropdown"
+      />
+    </div>
+  ) : (
+    <Button
+      key="login"
+      type="button"
+      onClick={handleLogin}
+      className="usa-button usa-button--outline"
+      style={{ marginLeft: "auto" }}
+    >
+      <Icon.Login aria-label="Login" />
+      Sign In
+    </Button>
+  );
+
+  const allNavItems = [...processedNavItems, authNavItem];
+
   return (
     <>
       <Header
@@ -118,7 +179,7 @@ export const PageHeader = ({
             <NavMenuButton onClick={onClick} label="Menu" />
           </div>
           <PrimaryNav
-            items={processedNavItems}
+            items={allNavItems}
             mobileExpanded={expanded}
             onToggleMobileNav={onClick}
           />

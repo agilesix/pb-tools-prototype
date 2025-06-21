@@ -32,3 +32,6 @@ pnpm-debug.log*
 # USWDS assets (copied from node_modules)
 public/fonts/
 public/img/
+
+# Keys
+.keys/
