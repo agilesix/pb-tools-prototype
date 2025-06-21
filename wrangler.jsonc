@@ -11,5 +11,13 @@
   },
   "observability": {
     "enabled": true
+  },
+  "env": {
+    "preview": {
+      "name": "pb-tools-preview",
+      "vars": {
+        "ENVIRONMENT": "preview"
+      }
+    }
   }
 }
