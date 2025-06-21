@@ -64,7 +64,16 @@ export const IssueCard: React.FC<IssueCardProps> = ({ issue }) => {
           rel="noopener noreferrer"
           className="text-base-darkest"
         >
-          <h3 className="usa-card__heading">{issue.title}</h3>
+          <h3 className="usa-card__heading">
+            <a
+              href={issueUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-base-darkest"
+            >
+              {issue.title}
+            </a>
+          </h3>
         </a>
         <p id="issue-score" className="usa-card__heading-description">
           <strong>Score:</strong> {score} ({proposalVotes.upvote} upvotes,{" "}
