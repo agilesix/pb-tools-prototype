@@ -52,3 +52,11 @@
     color: color("primary-darkest") !important;
   }
 }
+
+
+.nav-dropdown .usa-nav__submenu-item .logout-button {
+  color: color("base-darker");
+  @include at-media("desktop") {
+    color: color("white") !important;
+  }
+}

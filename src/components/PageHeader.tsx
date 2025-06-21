@@ -64,7 +64,7 @@ export const PageHeader = ({
   const handleLogin = async () => {
     const { signIn } = await import("auth-astro/client");
     console.log("signIn");
-    signIn("github");
+    signIn("google");
   };
 
   const handleLogout = async () => {
@@ -124,7 +124,7 @@ export const PageHeader = ({
 
   // Add user authentication section to navigation
   const authNavItem = user ? (
-    <div key="user-auth">
+    <div key="user-auth" className="nav-dropdown">
       <NavDropDownButton
         menuId="userDropdown"
         onToggle={(): void => setUserDropdownOpen(!userDropdownOpen)}
@@ -136,10 +136,13 @@ export const PageHeader = ({
           <button
             key="logout"
             onClick={handleLogout}
-            className="usa-button usa-button--unstyled width-full text-left padding-2 text-white hover:bg-primary-dark"
-            style={{ border: "none", background: "none", cursor: "pointer" }}
+            className="usa-button usa-button--unstyled usa-nav__submenu-item logout-button"
           >
-            <Icon.Logout aria-label="Logout" size={3} />
+            <Icon.Logout
+              aria-label="Logout"
+              size={3}
+              className="margin-right-1"
+            />
             Sign Out
           </button>,
         ]}
