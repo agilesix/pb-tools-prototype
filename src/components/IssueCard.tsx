@@ -74,7 +74,7 @@ export const IssueCard: React.FC<IssueCardProps> = ({ issue }) => {
                   key={label.name}
                   className="display-inline-block margin-right-1"
                 >
-                  <Tag className="bg-accent-warm-darker">{label.name}</Tag>
+                  <Tag className="bg-secondary-dark">{label.name}</Tag>
                 </li>
               ))}
             </ul>

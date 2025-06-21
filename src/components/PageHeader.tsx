@@ -103,7 +103,11 @@ export const PageHeader = ({
 
   return (
     <>
-      <Header basic={true} showMobileOverlay={expanded}>
+      <Header
+        className="border-bottom border-width-025 border-primary-vivid"
+        basic={true}
+        showMobileOverlay={expanded}
+      >
         <div className="usa-nav-container">
           <div className="usa-navbar">
             <Title>

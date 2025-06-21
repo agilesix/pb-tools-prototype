@@ -70,11 +70,7 @@ export const SingleVoteButtonGroup: React.FC<Props> = ({
       <ButtonGroup type="segmented">
         <Button
           type="button"
-          className={
-            voteState === "upvoted"
-              ? "usa-button--default"
-              : "usa-button--outline"
-          }
+          outline={voteState !== "upvoted"}
           onClick={handleUpvote}
         >
           <Icon.ThumbUpAlt className="margin-right-1" aria-label="Thumbs up" />
@@ -82,11 +78,7 @@ export const SingleVoteButtonGroup: React.FC<Props> = ({
         </Button>
         <Button
           type="button"
-          className={
-            voteState === "downvoted"
-              ? "usa-button--default"
-              : "usa-button--outline"
-          }
+          outline={voteState !== "downvoted"}
           onClick={handleDownvote}
         >
           <Icon.ThumbDownAlt
