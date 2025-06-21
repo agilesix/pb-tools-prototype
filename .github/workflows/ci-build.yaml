@@ -16,25 +16,6 @@ jobs:
       - name: Test Build
         run: npm run build
 
-      - name: Debug Build Output
-        run: |
-          echo "=== BUILD DEBUG INFO ==="
-          echo "Total files in dist:"
-          find dist -type f | wc -l
-          echo "Dist directory size:"
-          du -sh dist
-          echo "Files by extension:"
-          find dist -type f | sed 's/.*\.//' | sort | uniq -c | sort -nr | head -10
-          echo "USWDS assets check:"
-          echo "Font files:"
-          find dist -name "*.woff*" | wc -l
-          echo "SVG files:"
-          find dist -name "*.svg" | wc -l
-          echo "Public directory contents:"
-          ls -la public/
-          echo "Dist directory structure:"
-          find dist -type d | head -10
-
       - name: Deploy Preview
         run: npx wrangler deploy --env preview
         env:
