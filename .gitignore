@@ -1,5 +1,7 @@
 # build output
 dist/
+.vite-cache/
+
 # generated types
 .astro/
 
@@ -26,3 +28,7 @@ pnpm-debug.log*
 # wrangler files
 .wrangler
 .dev.vars
+
+# USWDS assets (copied from node_modules)
+public/fonts/
+public/img/
