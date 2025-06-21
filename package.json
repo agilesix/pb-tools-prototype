@@ -5,8 +5,7 @@
   "scripts": {
     "dev": "astro dev",
     "build": "astro build",
-    "preview": "astro build && wrangler pages dev",
-    "deploy": "astro build && wrangler pages deploy",
+    "preview": "astro build && wrangler dev",
     "astro": "astro",
     "copy:fonts": "cp -r node_modules/@uswds/uswds/dist/fonts public/fonts",
     "copy:img": "cp -r node_modules/@uswds/uswds/dist/img public/img",
