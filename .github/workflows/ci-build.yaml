@@ -1,4 +1,4 @@
-name: CI - Test Build
+name: CI - Test Build & Preview
 
 on:
   pull_request:
@@ -15,3 +15,14 @@ jobs:
 
       - name: Test Build
         run: npm run build
+
+      - name: Deploy Preview
+        uses: cloudflare/wrangler-action@v3
+        with:
+          apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          command: deploy --env preview
+        env:
+          GOOGLE_CLIENT_ID: ${{ secrets.GOOGLE_CLIENT_ID }}
+          AUTH_SECRET: ${{ secrets.AUTH_SECRET }}
+          GOOGLE_CLIENT_SECRET: ${{ secrets.GOOGLE_CLIENT_SECRET }}
+          ENVIRONMENT: preview
