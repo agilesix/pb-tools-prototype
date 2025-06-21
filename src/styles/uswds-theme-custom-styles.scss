@@ -1,0 +1,54 @@
+@use "uswds-core" as *;
+
+/* Override default button to use darkest primary color */
+.usa-button:not(.usa-button--secondary):not(.usa-button--outline):not(.usa-button--base):not(.usa-button--accent-cool):not(.usa-button--accent-warm) {
+  @include set-text-and-bg("primary-dark", $context: "Button");
+  
+  &:hover,
+  &.usa-button--hover {
+    @include set-text-and-bg("primary-darkest", $context: "Button");
+  }
+  
+  &:active,
+  &.usa-button--active {
+    @include set-text-and-bg("primary-darkest", $context: "Button");
+  }
+}
+
+/* Override outline button to use theme colors */
+.usa-button-group .usa-button--outline {
+  background-color: color("transparent");
+  box-shadow: inset 0 0 0 units($theme-button-stroke-width) color("primary-dark");
+  color: color("primary-dark");
+
+  &:visited {
+    color: color("primary-darkest");
+  }
+
+  &:hover,
+  &.usa-button--hover {
+    background-color: color("transparent");
+    box-shadow: inset 0 0 0 units($theme-button-stroke-width) color("primary-darkest");
+    color: color("primary-darkest");
+  }
+
+  &:active,
+  &.usa-button--active {
+    background-color: color("transparent");
+    box-shadow: inset 0 0 0 units($theme-button-stroke-width) color("primary-darkest");
+    color: color("primary-darkest");
+  }
+}
+
+/* Override NavMenuButton color for better contrast in mobile view */
+.usa-menu-btn {
+  background-color: color("primary-dark") !important;
+  
+  &:hover {
+    background-color: color("primary-darkest") !important;
+  }
+  
+  &:active {
+    color: color("primary-darkest") !important;
+  }
+} 
