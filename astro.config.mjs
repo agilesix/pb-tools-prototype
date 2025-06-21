@@ -5,10 +5,12 @@ import cloudflare from "@astrojs/cloudflare";
 
 import react from "@astrojs/react";
 
+import auth from "auth-astro";
+
 // https://astro.build/config
 export default defineConfig({
   adapter: cloudflare(),
-  integrations: [react()],
+  integrations: [react(), auth()],
 
   // Tell Sass where to look for USWDS packages
   vite: {
