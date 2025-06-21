@@ -1,7 +1,7 @@
 ---
 import BaseLayout from "@/layout/BaseLayout.astro";
-import { GovBanner } from "@trussworks/react-uswds";
 import { PageHeader, type NavItem } from "@/components/PageHeader";
+import { getSession } from "auth-astro/server";
 
 // #########################################################
 // PageLayout Props
@@ -23,6 +23,9 @@ const {
 } = Astro.props as Props;
 
 const siteName = "Simpler Planning";
+
+// Get user session
+const session = await getSession(Astro.request);
 
 // #########################################################
 // Determine current page to highlight in header
@@ -50,7 +53,12 @@ const processedNavItems = navItems.map((item) => {
 
 <BaseLayout siteName={siteName} title={title} description={description}>
   <a class="usa-skipnav" href="#main-content">Skip to main content</a>
-  <PageHeader title={siteName} navItems={processedNavItems} />
+  <PageHeader
+    title={siteName}
+    navItems={processedNavItems}
+    user={session?.user}
+    client:load
+  />
   <main id="main-content" class="usa-section">
     <div class="grid-container">
       <slot />
